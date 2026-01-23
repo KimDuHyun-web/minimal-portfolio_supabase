@@ -1,4 +1,11 @@
 import Image from "next/image";
+import './bootstrap-grid.min.css'
+import './reset.css'
+import './common.css'
+import './default.css'
+import './responsive.css'
+
+
 export const metadata = {
   title: "Minimal Portfolio",
   description: "The Most Fantastic And Flawless Portfolio In The World",
