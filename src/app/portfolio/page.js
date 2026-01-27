@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export default async function Portfolio() {
   const supabase = createClient();
-  const { data: projects } = await supabase.from("portfolio").select().limit(3);
+  const { data: projects } = await supabase.from("portfolio").select();
   console.log(projects)
   return (
     <div className="container latest_portfolio">
