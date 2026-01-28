@@ -131,11 +131,15 @@ export default function Insert() {
       alert(`파일 업로드 실패: ${result.error.message}`);
       return;
     }
+
     const result2 = files.rep1_img ? await uploadFile(files.rep1_img, 'rep1Img') : null;
+    console.log(result2);    
     if (result2?.ok === false) {
       alert(`파일 업로드 실패: ${result2.error.message}`);
     }
+    
     const result3 = files.rep2_img ? await uploadFile(files.rep2_img, 'rep2Img') : null;
+    console.log(result3);
     if (result3?.ok === false) {
       alert(`파일 업로드 실패: ${result3.error.message}`);
     }
@@ -180,7 +184,7 @@ export default function Insert() {
     }
   }
   */
-  const uploadFile = useCallback(
+   const uploadFile = useCallback(
     async (file, folder) => {
       const filepath = `${folder}/${Date.now()}-${file.name}`;
       const { data, error } = await supabase.storage
@@ -193,15 +197,14 @@ export default function Insert() {
     [supabase]
   );
 
-  const handleKakaoLogin = async () => {
+  const handleKakaoLogin = async ()=>{
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       options: {
-      redirectTo: `http://localhost:3000/`,
+        redirectTo: `http://localhost:3000/insert`,
       },
     })
   }
-
 
   if (!user) {
     return (
@@ -232,15 +235,15 @@ export default function Insert() {
         <h2 className="mb-3">프로젝트 입력</h2>
         <form action="" onSubmit={onSubmit}>
           <p className="field">
-            <label htmlFor="title">프로젝트 제목:</label>
-            <input type="text" id="title" name="title" value={data.title} onChange={handleChange} placeholder="프로젝트 제목" />
+            <label htmlFor="title">제목:</label>
+            <input type="text" id="title" name="title" value={data.title} onChange={handleChange} placeholder="Project title" />
           </p>
           <p className="field">
-            <label htmlFor="content">프로젝트 설명:</label>
-            <textarea name="content" id="content" value={data.content} onChange={handleChange} cols="30" rows="10" placeholder="프로젝트 설명"></textarea>
+            <label htmlFor="content">프로젝트 본문:</label>
+            <textarea name="content" id="content" value={data.content} onChange={handleChange} cols="30" rows="10" placeholder="project description"></textarea>
           </p>
           <p className="field">
-            <label htmlFor="url">프로젝트 링크:</label>
+            <label htmlFor="url">프로젝트 링크</label>
             <input type="url" id="url" name="url" value={data.url} onChange={handleChange} placeholder="프로젝트 링크" />
           </p>
           <p className="field">
@@ -248,8 +251,8 @@ export default function Insert() {
             <textarea name="review" id="review" value={data.review} onChange={handleChange} cols="30" rows="10" placeholder="리뷰 본문"></textarea>
           </p>
           <p className="field">
-            <label htmlFor="reviewer">리뷰 글쓴이:</label>
-            <input type="text" id="reviewer" name="reviewer" value={data.reviewer} onChange={handleChange} placeholder="리뷰 글쓴이" />
+            <label htmlFor="reviewer">Phone Number:</label>
+            <input type="text" id="reviewer" value={data.reviewer} name="reviewer" onChange={handleChange} placeholder="리뷰 글쓴이" />
           </p>
           <p className="field">
             <label htmlFor="rep1_img">대표이미지1 :</label>

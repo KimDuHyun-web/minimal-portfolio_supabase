@@ -12,9 +12,9 @@ export default async function Home() {
     const { data } = supabase
       .storage
       .from('portfolio')
-      .getPublicUrl(path)
+      .getPublicUrl(path);
 
-    return data.publicUrl
+    return data.publicUrl; 
   }
   return (
     <>
@@ -41,16 +41,16 @@ export default async function Home() {
             projects.map(p =>
               <div className="col-md-4" key={p.id}>
                 <div className="contents shadow">
-                  <Image src={getPublicURL(p.thumbnail)} width={364} height={209} alt={p.title}/>
+                   <Image src={getPublicURL(p.thumbnail)} width={364} height={209} alt={p.title}/> 
                     <div className="hover_contents">
                       <div className="list_info">
                         <h3>
                           <Link href={`/detail/${p.id}`}>{p.title}</Link>
                           <Image src="/images/portfolio_list_arrow.png" width={6} height={8} alt="list arrow"/>
-                          </h3>
+                        </h3>
                         <p>
                           <Link href={`/detail/${p.id}`}>Click to see project</Link>
-                          </p>
+                        </p>
                       </div>
                     </div>
                 </div>
