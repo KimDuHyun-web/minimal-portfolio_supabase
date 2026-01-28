@@ -131,7 +131,7 @@ export default function Insert() {
       alert(`파일 업로드 실패: ${result.error.message}`);
       return;
     }
-    const result2 = files.rep1_img ? await uploadFile(files.rep1_img, 'rep1Img') : null;    
+    const result2 = files.rep1_img ? await uploadFile(files.rep1_img, 'rep1Img') : null;
     if (result2?.ok === false) {
       alert(`파일 업로드 실패: ${result2.error.message}`);
     }
@@ -180,7 +180,7 @@ export default function Insert() {
     }
   }
   */
-   const uploadFile = useCallback(
+  const uploadFile = useCallback(
     async (file, folder) => {
       const filepath = `${folder}/${Date.now()}-${file.name}`;
       const { data, error } = await supabase.storage
@@ -192,6 +192,15 @@ export default function Insert() {
     },
     [supabase]
   );
+
+  const handleKakaoLogin = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'kakao',
+      options: {
+      redirectTo: `http://localhost:3000/`,
+      },
+    })
+  }
 
 
   if (!user) {
@@ -212,6 +221,7 @@ export default function Insert() {
             <input type="submit" className="primary-btn" value="로그인" />
           </p>
         </form>
+        <button className="mt-3 primary-btn" onClick={handleKakaoLogin}>카카오 로그인</button>
       </div>
     )
   }
@@ -243,7 +253,7 @@ export default function Insert() {
           </p>
           <p className="field">
             <label htmlFor="rep1_img">대표이미지1 :</label>
-            <input type="file" ref={(el) => (fileRef.current.rep1_img = el)} accept="image/*" id="rep1_img" name="rep1_img" onChange={handleFileChange("rep1_img")}/>
+            <input type="file" ref={(el) => (fileRef.current.rep1_img = el)} accept="image/*" id="rep1_img" name="rep1_img" onChange={handleFileChange("rep1_img")} />
           </p>
           <p className="field">
             <label htmlFor="rep1_desc">대표이미지1 설명:</label>
@@ -251,7 +261,7 @@ export default function Insert() {
           </p>
           <p className="field">
             <label htmlFor="rep2_img">대표이미지2 :</label>
-            <input type="file" ref={(el) => (fileRef.current.rep2_img = el)} accept="image/*" id="rep2_img" name="rep2_img" onChange={handleFileChange("rep2_img")}/>
+            <input type="file" ref={(el) => (fileRef.current.rep2_img = el)} accept="image/*" id="rep2_img" name="rep2_img" onChange={handleFileChange("rep2_img")} />
           </p>
           <p className="field">
             <label htmlFor="rep2_desc">대표이미지2 설명:</label>

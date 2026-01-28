@@ -2,7 +2,12 @@
 const nextConfig = {
   /* config options here */
   images: {
-    remotePatterns: [
+        remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'dummyimage.com',
+        pathname: '/**',
+      },
       {
         protocol: 'https',
         hostname: 'phknlljlhlzlbkjijlgw.supabase.co',
